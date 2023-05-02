@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+class TrocaNumero {
+
+    public static void trocarNumeros(int numA, int numB) {
+        int temp = numA;
+        numA = numB;
+        numB = temp;
+        System.out.println("Depois: NumA = " + numA + ", NumB = " + numB);
+    }
+    
+}
+    
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite o valor de numA: ");
+        int numA = scanner.nextInt();
+        System.out.print("Digite o valor de numB: ");
+        int numB = scanner.nextInt();
+
+        System.out.println("Antes: NumA = " + numA + ", NumB = " + numB);
+        TrocaNumero.trocarNumeros(numA, numB);
+
+        scanner.close();
+    }
+
+}

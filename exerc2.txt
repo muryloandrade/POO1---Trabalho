@@ -1,0 +1,24 @@
+import java.util.Scanner;
+
+
+class NumeroDecrescente {
+
+    public static void imprimirNumeroDecrescente(int numero) {
+        for (int i = numero; i >= 0; i--) {
+            System.out.println(i);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Digite o número para exibir a ordem decrescente: ");
+        int numero = scanner.nextInt();
+
+        NumeroDecrescente.imprimirNumeroDecrescente(numero);
+
+        scanner.close();
+    }
+}

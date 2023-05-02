@@ -1,0 +1,70 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        MediaAluno aluno = new MediaAluno();
+        
+        int opcao = 0;
+        while (opcao != 3) {
+            System.out.println("Escolha uma opção:");
+            System.out.println("1 - Adicionar nota");
+            System.out.println("2 - Calcular média");
+            System.out.println("3 - Sair");
+
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    System.out.print("Digite o valor da nota: ");
+                    int nota = scanner.nextInt();
+                    aluno.adicionarNota(nota);
+                    break;
+                case 2:
+                    aluno.calcularMedia();
+                    break;
+                case 3:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+            }
+
+            System.out.println();
+        }
+
+        scanner.close();
+    }
+}
+
+class MediaAluno {
+    private ArrayList<Integer> notas;
+
+    public MediaAluno() {
+        notas = new ArrayList<>();
+    }
+
+    public void adicionarNota(int nota) {
+        if (nota >= 0 && nota <= 100) {
+            notas.add(nota);
+            System.out.println("Nota adicionada com sucesso.");
+        } else {
+            System.out.println("Erro: A nota deve estar entre 0 e 100");
+        }
+    }
+
+    public void calcularMedia() {
+        if (notas.size() == 0) {
+            System.out.println("Não há notas registradas para calcular a média.");
+        } else {
+            int soma = 0;
+            for (int nota : notas) {
+                soma += nota;
+            }
+            double media = (double) soma / notas.size();
+            System.out.println("A média do aluno é: " + media);
+        }
+    }
+}

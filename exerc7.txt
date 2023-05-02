@@ -1,0 +1,144 @@
+import java.util.Scanner;
+
+class Contato {
+    private String nome;
+    private String email;
+
+    public Contato(String nome, String email) {
+        this.nome = nome;
+        this.email = email;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}
+
+class Agenda {
+    private Contato[] contatos;
+
+    public Agenda(int tamanho) {
+        contatos = new Contato[tamanho];
+    }
+
+    public void adicionarContato(Contato contato) {
+        for (int i = 0; i < contatos.length; i++) {
+            if (contatos[i] == null) {
+                contatos[i] = contato;
+                break;
+            }
+        }
+    }
+
+    public Contato buscarContato(String nome) {
+        for (Contato contato : contatos) {
+            if (contato != null && contato.getNome().equals(nome)) {
+                return contato;
+            }
+        }
+        return null;
+    }
+
+    public void excluirContato(String nome) {
+        for (int i = 0; i < contatos.length; i++) {
+            if (contatos[i] != null && contatos[i].getNome().equals(nome)) {
+                contatos[i] = null;
+                break;
+            }
+        }
+    }
+}
+
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        // Cria uma nova agenda com tamanho 5
+        Agenda minhaAgenda = new Agenda(5);
+
+        Scanner scanner = new Scanner(System.in);
+
+        // Loop principal do programa
+        while (true) {
+
+            // Exibe as opções disponíveis para o usuário
+            System.out.println("\nO que deseja fazer?");
+            System.out.println("1 - Adicionar um contato");
+            System.out.println("2 - Buscar um contato");
+            System.out.println("3 - Excluir um contato");
+            System.out.println("4 - Sair do programa");
+
+            // Lê a escolha do usuário
+            int escolha = scanner.nextInt();
+            scanner.nextLine(); // consome a quebra de linha deixada pelo nextInt()
+
+            switch (escolha) {
+
+                case 1:
+                    // Pede ao usuário os dados do contato a ser adicionado
+                    System.out.println("\nDigite o nome do contato:");
+                    String nome = scanner.nextLine();
+
+                    System.out.println("Digite o email do contato:");
+                    String email = scanner.nextLine();
+
+                    // Cria um novo contato com os dados informados e adiciona-o na agenda
+                    Contato novoContato = new Contato(nome, email);
+                    minhaAgenda.adicionarContato(novoContato);
+
+                    System.out.println("\nContato adicionado com sucesso!");
+                    break;
+
+                case 2:
+                    // Pede ao usuário o nome do contato a ser buscado
+                    System.out.println("\nDigite o nome do contato que deseja buscar:");
+                    nome = scanner.nextLine();
+
+                    // Busca o contato na agenda
+                    Contato contatoEncontrado = minhaAgenda.buscarContato(nome);
+
+                    // Exibe o resultado da busca
+                    if (contatoEncontrado != null) {
+                        System.out.println("\nContato encontrado:");
+                        System.out.println("Nome: " + contatoEncontrado.getNome());
+                        System.out.println("Email: " + contatoEncontrado.getEmail());
+                    } else {
+                        System.out.println("\nContato não encontrado!");
+                    }
+                    break;
+
+                case 3:
+                    // Pede ao usuário o nome do contato a ser excluído
+                    System.out.println("\nDigite o nome do contato que deseja excluir:");
+                    nome = scanner.nextLine();
+
+                    // Exclui o contato da agenda
+                    minhaAgenda.excluirContato(nome);
+
+                    System.out.println("\nContato excluído com sucesso!");
+                    break;
+
+                case 4:
+                    // Encerra o programa
+                    System.out.println("\nPrograma encerrado.");
+                    System.exit(0);
+                    break;
+
+                default:
+                    // Exibe uma mensagem de erro caso a escolha do usuário seja inválida
+                    System.out.println("\nOpção inválida. Por favor, tente novamente.");
+                    break;
+            }
+        }
+    }
+}
+
